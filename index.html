@@ -11,109 +11,112 @@
     </head>
 
     <body onload='getUfs()'>
-        <h1>Como não codificar com Html e JS / How not to code with Html and JS</h1>
+        <div>
+            <h1>Como não codificar com Html e JS / How not to code with Html and JS</h1>
 
-        <div id="main">
-            <div class="section wrong-way">
-                <h3>Como não codificar / How not to code</h3>
+            <div id="main">
+                <div class="section wrong-way">
+                    <h3>Como não codificar / How not to code</h3>
 
-                <p>Um loop para adicionar uma opção em um elemento Html a cada iteração.</p>
+                    <p>Um loop para adicionar uma opção em um elemento Html a cada iteração.</p>
 
-                <pre>
-                    <code>
-                        async function getCitiesWrongWay ( event ) {
-                            const citiesWWS = document.getElementById( 'citiesWWS' );
+                    <pre>
+                        <code>
+                            async function getCitiesWrongWay ( event ) {
+                                const citiesWWS = document.getElementById( 'citiesWWS' );
 
-                            const cities = await axios.get( `APIUrl` )
-                                .then( res => res.data )
-                                .then( cities => cities )
-                                .catch( error => console.log( error ) );
-                        
-                            citiesWWS.innerHTML = '&lt;option&gt;Escolha uma cidade&lt;/option&gt;';
-                        
-                            for ( const city of cities ) {
-                                citiesWWS.innerHTML +=
-                                `&lt;option value='${ city.nome }'&gt;${ city.nome }&lt;/option&gt;`;
+                                const cities = await axios.get( `APIUrl` )
+                                    .then( res => res.data )
+                                    .then( cities => cities )
+                                    .catch( error => console.log( error ) );
+                            
+                                citiesWWS.innerHTML = '&lt;option&gt;Escolha uma cidade&lt;/option&gt;';
+                            
+                                for ( const city of cities ) {
+                                    citiesWWS.innerHTML +=
+                                    `&lt;option value='${ city.nome }'&gt;${ city.nome }&lt;/option&gt;`;
+                                }
                             }
-                        }
-                    </code>
-                </pre>
+                        </code>
+                    </pre>
 
-                <p>Escolhendo a Paraíba (200+ cidades), o select das cidades demorará alguns segundos para mostrar as cidades. Escolhendo Minas Gerais (800+ cidades), o site travará.</p>
+                    <p>Escolhendo a Paraíba (200+ cidades), o select das cidades demorará alguns segundos para mostrar as cidades. Escolhendo Minas Gerais (800+ cidades), o site travará.</p>
 
-                <div class='options'>
-                    <div>
-                        <span>Estado</span>
+                    <div class='options'>
+                        <div>
+                            <span>Estado</span>
 
-                        <select
-                            id="statesWWS"
-                            disabled='true'
-                        >
-                            <option>Escolha um estado</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <span>Cidade</span>
+                            <select
+                                id="statesWWS"
+                                disabled='true'
+                            >
+                                <option>Escolha um estado</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <span>Cidade</span>
 
-                        <select
-                            id="citiesWWS"
-                            disabled='true'
-                        >
-                            <option>Escolha uma cidade</option>
-                        </select>
+                            <select
+                                id="citiesWWS"
+                                disabled='true'
+                            >
+                                <option>Escolha uma cidade</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="section right-way">
-                <h3>Como codificar / How to code</h3>
+                <div class="section right-way">
+                    <h3>Como codificar / How to code</h3>
 
-                <p>Um loop para adicionar o resultado das iterações em uma string, para só ao fim do loop adicionar o resultado final no elemento Html.</p>
+                    <p>Um loop para adicionar o resultado das iterações em uma string, para só ao fim do loop adicionar o resultado final no elemento Html.</p>
 
-                <pre>
-                    <code>
-                        async function getCitiesRightWay ( event ) {
-                            const citiesRWS = document.getElementById( 'citiesRWS' );
-                        
-                            const cities = await axios.get( `APIUrl` )
-                                .then( res => res.data )
-                                .then( cities => cities )
-                                .catch( error => console.log( error ) );
+                    <pre>
+                        <code>
+                            async function getCitiesRightWay ( event ) {
+                                const citiesRWS = document.getElementById( 'citiesRWS' );
                             
-                            let options = '&lt;option&gt;Escolha uma cidade&lt;/option&gt;';
-                            for ( const city of cities ) {
-                                options += `&lt;option value='${ city.nome }'&gt;${ city.nome }/&lt;option&gt;`;
+                                const cities = await axios.get( `APIUrl` )
+                                    .then( res => res.data )
+                                    .then( cities => cities )
+                                    .catch( error => console.log( error ) );
+                                
+                                let options = '&lt;option&gt;Escolha uma cidade&lt;/option&gt;';
+                                for ( const city of cities ) {
+                                    options +=
+                                      `&lt;option value='${ city.nome }'&gt;${ city.nome }/&lt;option&gt;`;
+                                }
+
+                                cities.innerHTML = options;
                             }
+                        </code>
+                    </pre>
 
-                            cities.innerHTML = options;
-                        }
-                    </code>
-                </pre>
+                    <p>Mesmo escolhendo Minas Gerais, as cidades são carregadas quase instantaneamente.</p>
 
-                <p>Mesmo escolhendo Minas Gerais, as cidades são carregadas quase instantaneamente.</p>
+                    <div class='options'>
+                        <div>
+                            <span>Estado</span>
 
-                <div class='options'>
-                    <div>
-                        <span>Estado</span>
+                            <select
+                                id="statesRWS"
+                                disabled='true'
+                            >
+                                <option>Escolha um estado</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <span>Cidade</span>
 
-                        <select
-                            id="statesRWS"
-                            disabled='true'
-                        >
-                            <option>Escolha um estado</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <span>Cidade</span>
-
-                        <select 
-                            id="citiesRWS"
-                            disabled='true'
-                        >
-                            <option>Escolha uma cidade</option>
-                        </select>
+                            <select 
+                                id="citiesRWS"
+                                disabled='true'
+                            >
+                                <option>Escolha uma cidade</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

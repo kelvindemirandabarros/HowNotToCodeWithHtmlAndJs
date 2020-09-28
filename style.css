@@ -14,7 +14,7 @@ body {
 }
 
 body {
-    background-color: gray;
+    background-color: rgb(223, 223, 223);
 }
 
 h1,
@@ -43,10 +43,11 @@ p {
 
 #main {
     display: flex;
+    justify-content: space-around;
 }
 
 .section {
-    width: 50vw;
+    width: 49vw;
     display: flex;
     flex-direction: column;
 }
@@ -58,9 +59,9 @@ p {
 }
 
 .wrong-way {
-    background-color: red;
+    background-color: rgba(255, 154, 154, 0.5);
 }
 
 .right-way {
-    background-color: green;
+    background-color: rgba(149, 255, 149, 0.5);
 }
